@@ -9,8 +9,8 @@ public class CruisesContent extends ContentArea {
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();
         // Load a web page
-        webEngine.load("https://www.google.com"); // add in lodging site
+        webEngine.load("https://www.cruisemapper.com/ships"); // add in lodging site
         
-		content = new VBox();
+		content = new VBox(webView);
 	}
 }
