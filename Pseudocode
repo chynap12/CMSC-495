@@ -1,0 +1,88 @@
+abstract class ContentArea:
+    VBox content
+    abstract method initialize()
+
+class OverviewContent extends ContentArea:
+    method initialize():
+        content = new VBox(
+            # Content Here
+        )
+
+class CruisesContent extends ContentArea:
+    method initialize():
+        content = new VBox(
+            # Content Here
+        )
+
+class LodgingContent extends ContentArea:
+    method initialize():
+        TextField destination;
+        DateField cruiseDate;
+        NumberField duration;
+        NumberField travelers;
+
+        content = new VBox(
+            destination, cruiseDate, duration, travelers
+        )
+
+class ManifestContent extends ContentArea:
+    method initialize():
+        content = new VBox (
+            # Content Here
+        )
+
+class MaintenanceContent extends ContentArea:
+    method initialize():
+        content = new VBox (
+            # Content Here
+        )
+
+class BillingsContent extends ContentArea:
+    method initialize():
+        content = new VBox()
+
+class CruiseLinerApp extends Application:
+    method build():
+        # Content Here
+
+    method start(primaryStage):
+        primaryStage.setTitle("Cruise Liner Management System")
+        Map<String, ContentArea> contentAreas
+        VBox mainLayout = new VBox(categoryButtons, root)
+        Scene scene = new Scene(mainLayout, 800, 600)
+
+        ToggleButton overviewButton
+        ToggleButton cruisesButton
+        ToggleButton portsButton
+        ToggleButton maintenanceButton
+        ToggleButton billingsButton
+        ToggleButton lodgingButton
+
+        ToggleGroup tabs
+        overviewButton.setToggleGroup(tabs)
+        shipButton.setToggleGroups(tabs)
+        portsButton.setToggleGroups(tabs)
+        maintenanceButton(tabs)
+        billingsButton(tabs)
+        lodgingButton(tabs)
+
+        HBox topNavButtons
+        topNavButtons.add(overviewButton, cruisesButton, portsButton, maintenanceButton, billingsButton, lodgingButton)
+
+        overviewButton.setSelected(true)
+
+        contentArea.put("Overview", new OverviewContent())
+        contentArea.put("Cruises", new CruisesContent())
+        contentArea.put("Ports", new PortsContent())
+        contentArea.put("Maintenance", new MaintenanceContent())
+        contentArea.put("Billings", new BillingsContent())
+        contentArea.put("Lodging", new LodgingContent())
+
+        scene.getStylesheets().add("style.css")
+
+    method main:
+        launch(args)
+
+    method showCategoryContent(contentArea):
+        root.getChildren().clear()
+        root.getChildren().add(content)
