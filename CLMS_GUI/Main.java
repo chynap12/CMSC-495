@@ -33,13 +33,34 @@ public class Main extends Application {
         billingsButton.setToggleGroup(toggleGroup);
         lodgingButton.setToggleGroup(toggleGroup);
 
-        // Content for Tabs
-        contentAreas.put("Overview", new OverviewContent());
-        contentAreas.put("Cruises", new CruisesContent());
-        contentAreas.put("Maintenance", new MaintenanceContent());
-        contentAreas.put("Billings", new BillingsContent());
-        contentAreas.put("Lodging", new LodgingContent());
-        contentAreas.put("Manifest", new ManifestContent());
+        // Create content tabs
+        OverviewContent overviewContent = new OverviewContent();
+        overviewContent.initialize();
+        contentAreas.put("Overview", overviewContent);
+
+        CruisesContent cruisesContent = new CruisesContent();
+        cruisesContent.initialize();
+        contentAreas.put("Cruises", cruisesContent);
+
+        MaintenanceContent maintenanceContent = new MaintenanceContent();
+        maintenanceContent.initialize();
+        contentAreas.put("Maintenance", maintenanceContent);
+
+        BillingsContent billingsContent = new BillingsContent();
+        billingsContent.initialize();
+        contentAreas.put("Billings", billingsContent);
+
+        LodgingContent lodgingContent = new LodgingContent();
+        lodgingContent.initialize();
+        contentAreas.put("Lodging", lodgingContent);
+
+        ManifestContent manifestContent = new ManifestContent();
+        manifestContent.initialize();
+        contentAreas.put("Manifest", manifestContent);
+
+
+
+        contentAreas.put("Overview", overviewContent);
 
         // Event handling for ToggleButtons
         overviewButton.setOnAction(e -> showCategoryContent(contentAreas.get("Overview").getContent()));
@@ -58,7 +79,7 @@ public class Main extends Application {
         categoryButtons.getStyleClass().add("toggle-group");
 
         // Create the main layout
-        root = new StackPane(contentAreas.get("Overview").getContent()); /** not properly initializing overview **/
+        root = new StackPane(contentAreas.get("Overview").getContent());
         VBox mainLayout = new VBox(categoryButtons, root);
         Scene scene = new Scene(mainLayout, 800, 600);
         
