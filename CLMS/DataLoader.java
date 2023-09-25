@@ -23,7 +23,7 @@ public class DataLoader {
 	static int tripLength; 
 	static int numCabins;
 	static int yearOfBuild;
-	static int maintance;
+	static int maintenance;
 	static int maxCapacity;
 
 	
@@ -45,56 +45,56 @@ public class DataLoader {
 			switch (colNum) {
 			case 0:
 				company = cell.getRichStringCellValue().getString();
-				System.out.println(colNum+ " " + company);
+				//System.out.println(colNum+ " " + company);
 				break;
 			case 1:
 				name = cell.getRichStringCellValue().getString();
-				System.out.println(colNum+ " " + name);
+				//System.out.println(colNum+ " " + name);
 				break;
 			case 2:
 				shipID = (int) cell.getNumericCellValue();
-				System.out.println(colNum+ " " + shipID);
+				//System.out.println(colNum+ " " + shipID);
 				break;
 			case 3:
 				location = cell.getRichStringCellValue().getString();
-				System.out.println(colNum+ " " + location);
+				//System.out.println(colNum+ " " + location);
 				break;
 			case 4:
 				tripLength = (int) cell.getNumericCellValue();
-				System.out.println(colNum+ " " + tripLength);
+				//System.out.println(colNum+ " " + tripLength);
 				break;
 			case 5:
 				numCabins = (int) cell.getNumericCellValue();
-				System.out.println(colNum+ " " + numCabins);
+				//System.out.println(colNum+ " " + numCabins);
 				break;
 			case 6:
 				yearOfBuild = (int) cell.getNumericCellValue();
-				System.out.println(colNum+ " " + yearOfBuild);
+				//System.out.println(colNum+ " " + yearOfBuild);
 				break;
 			case 7:
-				maintance = (int) cell.getNumericCellValue();
-				System.out.println(colNum+ " " + maintance);
+				maintenance = (int) cell.getNumericCellValue();
+				//System.out.println(colNum+ " " + maintenance);
 				break;
 			case 8:
 				maxCapacity = (int) cell.getNumericCellValue();
-				System.out.println(colNum+ " " + maxCapacity);
+				//System.out.println(colNum+ " " + maxCapacity);
 				break;
 			case 9:
 				origin = cell.getRichStringCellValue().getString();
-				System.out.println(colNum+ " " + origin);
+				//System.out.println(colNum+ " " + origin);
 				break;
 			case 10:
 				destination = cell.getRichStringCellValue().getString();
-				System.out.println(colNum+ " " + destination);
+				//System.out.println(colNum+ " " + destination);
 			default:
 				String travelSpot = cell.getRichStringCellValue().getString();
 				if (!travelSpot.isBlank()) 
 				{
 					itinerary[z] = travelSpot;
-					System.out.println(colNum+ " " + travelSpot); 
+					//System.out.println(colNum+ " " + travelSpot); 
 					z++;
 				}else {
-					System.out.println(colNum+ " ");
+					//System.out.println(colNum+ " ");
 				}
 				break;
 			}
@@ -106,8 +106,9 @@ public class DataLoader {
 		workbook.close();
 		inputStream.close();
 		CruiseShip cruiseShip = new CruiseShip(shipID, company, name, location, origin, destination,
-				 itinerary, tripLength,	numCabins, yearOfBuild, maxCapacity);
+				 itinerary, tripLength,	numCabins, yearOfBuild, maintenance, maxCapacity);
 		return cruiseShip;
 	}
 
+}
 }
