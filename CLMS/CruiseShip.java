@@ -53,31 +53,4 @@ public class CruiseShip extends CruiseCompany {
 	}
 	public int getMaxCapacity(){return maxCapacity;}
 
-	public int getAvailableCabins() {
-        
-		return numCabins;
-	}
-	
-	// Method to book a cabin
-	public boolean bookCabin() {
-	        
-		if (getAvailableCabins() > 0) {
-	            numCabins--;
-	            return true;
-	        }
-		return false; // No available cabins to book
-	}
-	
-	// Method to cancel a cabin booking
-	public void cancelCabinBooking() {
-	       
-		numCabins++;
-	}
-	
-	// Method to display ship information
-	public void displayShipInfo() {
-		System.out.println("Ship Name: " + name);
-        	System.out.println("Ship ID: " + shipID);
-	}
-	
 }
