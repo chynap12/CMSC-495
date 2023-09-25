@@ -91,7 +91,7 @@ public class OverviewContent extends ContentArea {
             if (selectedFile != null) {
                 String filePath = selectedFile.getPath();
 
-                // Add Excel file handling logic here
+                CLMS.loadExcel(filePath);
 
                 System.out.println("Selected Excel file: " + filePath);
             }
