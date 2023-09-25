@@ -3,22 +3,23 @@ package CLMS;
 public class CruiseShip extends CruiseCompany {
 
 	//variables
-	int shipID;
-	String name;
-	String location;
-	String origin;
-	String destination;
-	String[] itinerary;
-	int tripLength; 
-	int numCabins;
-	int yearOfBuild;
-	int maxCapacity;
+	private int shipID;
+	private String name;
+	private String location;
+	private String origin;
+	private String destination;
+	private String[] itinerary;
+	private int tripLength; 
+	private int numCabins;
+	private int yearOfBuild;
+	private int maintenance;
+	private int maxCapacity;
 	
 	//array of cabins
 	Cabin[] cabins;
 	
 	public CruiseShip(int shipID, String company, String name, String location, String origin, String destination,
-			String[] itinerary,	int tripLength,	int numCabins, int yearOfBuild,	int maxCapacity) {
+			String[] itinerary,	int tripLength,	int numCabins, int yearOfBuild, int maintenance, int maxCapacity) {
 		super(company);
 		this.shipID = shipID;
 		this.name = name;
@@ -28,7 +29,8 @@ public class CruiseShip extends CruiseCompany {
 		this.itinerary = itinerary;
 		this.tripLength = tripLength; 
 		this.numCabins = numCabins;
-		this.yearOfBuild =yearOfBuild;
+		this.yearOfBuild = yearOfBuild;
+		this.setMaintenance(maintenance);
 		this.maxCapacity = maxCapacity;
 	}
 	
@@ -43,6 +45,12 @@ public class CruiseShip extends CruiseCompany {
 	public int getTripLength(){return tripLength;}
 	public int getYearOfBuild(){return numCabins;}
 	public int getNumCabins(){return yearOfBuild;}
+	public int getMaintenance() {
+		return maintenance;
+	}
+	public void setMaintenance(int maintenance) {
+		this.maintenance = maintenance;
+	}
 	public int getMaxCapacity(){return maxCapacity;}
 
 	public int getAvailableCabins() {
