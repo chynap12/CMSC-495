@@ -12,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class DataLoader {
 
+
 	static String company;
 	static int shipID;
 	static String name;
@@ -25,13 +26,8 @@ public class DataLoader {
 	static int maintance;
 	static int maxCapacity;
 
-	static String filename = "C:/Users/djclo/OneDrive/Desktop/School/CMSC_495/Group3/CLMS_database.xlsx";
-
-	public static void main(String[] args) throws IOException {
-		Loadship(1);
-	}
-
-	public static void Loadship(int i) throws IOException {
+	
+	public static CruiseShip loadShip(String filename, int i) throws IOException {
 		// Creating a xls file object with specific file path to read
 		File xlsFile = new File(filename);
 		// Creating input stream
@@ -103,13 +99,15 @@ public class DataLoader {
 				break;
 			}
 			colNum++;
-
 		}
 		
 		// Closing the workbook and input stream
 
 		workbook.close();
 		inputStream.close();
+		CruiseShip cruiseShip = new CruiseShip(shipID, company, name, location, origin, destination,
+				 itinerary, tripLength,	numCabins, yearOfBuild, maxCapacity);
+		return cruiseShip;
 	}
 
 }
