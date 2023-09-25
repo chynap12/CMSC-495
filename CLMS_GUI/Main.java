@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    CLMS data = new CLMS(); 
     private StackPane root;
 
     @Override
