@@ -1,5 +1,6 @@
 package CLMS;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class DataLoader {
 	static int maintenance;
 	static int maxCapacity;
 
-	
+
 	public static CruiseShip loadShip(String filename, int i) throws IOException {
 		// Creating a xls file object with specific file path to read
 		File xlsFile = new File(filename);
@@ -100,13 +101,14 @@ public class DataLoader {
 			}
 			colNum++;
 		}
-		
+
 		// Closing the workbook and input stream
 
 		workbook.close();
 		inputStream.close();
+		System.out.println(i+"loaded");
 		CruiseShip cruiseShip = new CruiseShip(shipID, company, name, location, origin, destination,
-				 itinerary, tripLength,	numCabins, yearOfBuild, maintenance, maxCapacity);
+				itinerary, tripLength,	numCabins, yearOfBuild, maintenance, maxCapacity);
 		return cruiseShip;
 	}
 
