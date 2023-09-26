@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.util.*;
 
 public class Main extends Application {
+    CLMS data = new CLMS();
     private StackPane root;
     Map<String, ContentArea> contentAreas = new HashMap<>();
 
@@ -63,7 +64,7 @@ public class Main extends Application {
         Scene scene = new Scene(mainLayout, 800, 600);
         
         // Link the CSS file to the scene
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
         primaryStage.show();
