@@ -95,7 +95,13 @@ public class CruisesContent extends ContentArea {
         
         Button shipButton = new Button("Select Cruise");
         shipButton.setOnAction(e -> {
-        	
+        	if (cruiseSearch.getValue() != null) {
+            	openLodgingWindow();
+        	}
+        	else {
+        		openErrorWindow("CRUISE");
+        	}
+
         });
         
 
@@ -115,11 +121,6 @@ public class CruisesContent extends ContentArea {
 
         content = vbox;
         content.getStyleClass().add("overview-content");
-        
-        // Pages
-        shipButton.setOnAction(e -> {
-        	openLodgingWindow();
-        });
     }
       
     private void openLodgingWindow() {
@@ -129,22 +130,35 @@ public class CruisesContent extends ContentArea {
         GridPane lodgingLayout = new GridPane();
         Scene newScene = new Scene(lodgingLayout, 400, 200); // Adjust window size
 
-        lodgingLayout.setHgap(10); // Add horizontal spacing
-        lodgingLayout.setVgap(10); // Add vertical spacing
+        lodgingLayout.setHgap(10); 
+        lodgingLayout.setVgap(10);
         lodgingLayout.setStyle("-fx-padding: 20;");
 
-        // Buttons
-        Button bookButton = new Button("Book");
-        bookButton.setOnAction(e -> openBillingWindow());
-        Button reserveButton = new Button("Reserve");
-        reserveButton.setDisable(true);
+
 
         // Fields
-        ComboBox roomTypes = new ComboBox();
-        Spinner passengers = new Spinner();
-        Label estCost = new Label("$0.00");
+        ComboBox<String> roomTypes = new ComboBox<String>(getRooms()); // Need to change to Room Type Object
+        Spinner<Integer> passengers = new Spinner<Integer>();
+        Label estCost = new Label("$0.00"); // Set Est Cost
         HBox roomInfo = new HBox();
-
+      
+        // Buttons
+	    Button reserveButton = new Button("Reserve");
+	    reserveButton.setDisable(true);
+        Button bookButton = new Button("Book");
+        bookButton.setOnAction(e -> {
+        	if (roomTypes.getValue() != null) {
+        		openBillingWindow();
+        	}
+        	else {
+        		openErrorWindow("ROOM");
+        	}
+        });
+        
+        roomTypes.setOnAction(e -> {
+        	updateRoomInfo(estCost, passengers.getValue(), roomTypes.getValue());
+        });
+        
         // Add Components
         lodgingLayout.add(roomTypes, 0, 0);
         lodgingLayout.add(passengers, 1, 0);
@@ -228,8 +242,49 @@ public class CruisesContent extends ContentArea {
         newStage.show();
     }
     
+    private void openErrorWindow(String error) {
+        Stage newStage = new Stage();
+        newStage.setTitle("ERROR");
+
+        GridPane errorPane = new GridPane();
+        errorPane.setAlignment(Pos.CENTER); // Center the GridPane within the Scene
+        Scene newScene = new Scene(errorPane, 300, 70);
+
+        Button close = new Button("Close");
+        close.setPrefSize(100, 10);
+        close.setOnAction(e -> newStage.close());
+        errorPane.add(new Label("SELECT A " + error), 0, 0);
+        errorPane.add(close, 0, 1);
+
+        newStage.setScene(newScene);
+        newStage.show();
+    }
+    
+    // Need to update 
+    private void updateRoomInfo(Label estCost, int passengers, String room) {
+    	int cost = 0;
+    	switch (room) {
+			case "Room 1":
+				cost = 400;
+				break;
+			case "Room 2":
+				cost = 600;
+				break;
+			case "Room 3":
+				cost = 800;
+				break;
+    	}
+    	
+   		Integer totalCost = cost*passengers;
+    	estCost.setText(totalCost.toString());
+    }
+    
     private ObservableList<String> getShips() {
     	return FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
+    }
+    
+    private ObservableList<String> getRooms() {
+    	return FXCollections.observableArrayList("Room 1", "Room 2", "Room 3");
     }
     
     private void setImageUrl(String imageUrl) {
